@@ -9,7 +9,7 @@ json file like
 ````
 {
     'ingoing_ports': [
-        {'kind': 'tcp', 'port': 22},
+        {'kind': 'tcp', 'port': 22, "location": "0.0.0.0"},
         {'kind': 'udp', 'port': 53},
         {'kind': 'tcp', 'port': 80, status='CLOSED'},
 
@@ -22,7 +22,8 @@ json file like
         {"cmd": 'ping -c 1 google.com', "exit_status":0, stdout_regexp: "1 received", stderr_regexp: ""}
     ],
 
-    "memory": {"free_min": 100000},
+    "cpu": {'core_min': 8},
+    "ram": {"free_min": "7GB"},
 
     "filesystems": [
         {"path":"/", "free_min":100000},
