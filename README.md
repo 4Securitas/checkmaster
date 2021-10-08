@@ -10,12 +10,22 @@ json file like
 {
     'ingoing_ports': [
         {'kind': 'tcp', 'port': 22, "location": "0.0.0.0"},
-        {'kind': 'udp', 'port': 53},
+        {'kind': 'tcp', 'port': 8080, "location": "0.0.0.0"},
+        {'kind': 'tcp', 'port': 8443, "location": "0.0.0.0"},
         {'kind': 'tcp', 'port': 80, status='CLOSED'},
+
+        # ...
+        {'kind': 'tcp', 'port': 5044, "location": "0.0.0.0"},
+        {'kind': 'udp', 'port': 1514},
+        {'kind': 'tcp', 'port': 1515, "location": "0.0.0.0"},
+
 
     ],
     'outgoing_ports': [
-        {'addr': "that-host.net", "port":443, "kind": "tcp"}
+        {'addr': "that-host.net", "port":5150, "kind": "tcp"},
+        {'addr': "that-host.net", "port":443, "kind": "tcp"},
+        {'addr': "that-host.net", "port":5986, "kind": "tcp"}
+        {'addr': "that-host.net", "port":22, "kind": "tcp"}
     ],
 
     "system_commands": [
@@ -34,8 +44,5 @@ json file like
         {"kind": 'file', "path":"README.txt", "status"="absent"},
         {"kind": 'directory', "path":"READMEs", "status"="absent"},
     ],
-
-
-
 }
 ````
