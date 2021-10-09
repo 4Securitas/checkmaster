@@ -1,5 +1,6 @@
 import logging
 import psutil
+import socket
 
 LOCAL_ADDRESS = [
     '127.0.0.1',
@@ -9,7 +10,7 @@ LOCAL_ADDRESS = [
 logger = logging.getLogger(__name__)
 
 
-def check_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS):
+def check_local_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> bool:
     """
     +------------+----------------------------------------------------+
     | Kind Value | Connections using                                  |
@@ -39,3 +40,12 @@ def check_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS):
             return True
 
 
+
+def check_remote_port(ip, port) -> bool:
+   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+   try:
+      s.connect((ip, int(port)))
+      s.shutdown(2)
+      return True
+   except:
+      return False
