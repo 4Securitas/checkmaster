@@ -29,17 +29,19 @@ def check_local_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> 
     +------------+----------------------------------------------------+
     """
     for i in psutil.net_connections(kind=kind):
-        if all(
+        logger.debug(i)
+        result = all(
             (
                 i.status == status,
                 i.laddr.ip in addrs,
                 i.laddr.port == port
             )
-        ):
-            logger.debug(i)
-            return True
+        )
+        if result:
+            return result
         else:
-            return False
+            result = False
+    return result
 
 
 def check_remote_port(addr, port, timeout=4) -> bool:

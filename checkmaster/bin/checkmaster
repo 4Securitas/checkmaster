@@ -42,7 +42,6 @@ parser.add_argument(
 parser.add_argument(
     '--report-file',
     required=False,
-    # default='./checkmaster.log',
     help="report to a file"
 )
 parser.add_argument(
@@ -92,5 +91,5 @@ elif _args.configuration:
     if _args.report_file:
         with open(_args.report_file, 'w') as f:
             f.write(report)
-    else:
-        print(report)
+    # else:
+        # print(report)

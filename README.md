@@ -50,7 +50,7 @@ json configuration file like
     "ram": {"free": 7, "unit": "GB"},
 
     "filesystems": [
-        {"path":"/", "free_min": "100GB"}
+        {"path":"/", "free": "100", "unit": "GB"}
     ],
 
     "paths": [
