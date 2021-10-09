@@ -149,10 +149,10 @@ Feel free to open new issues and pull requests
 
 ## For Developers
 
-As you can see each rules have a python package and a function name, like `checkmaster.sockets.ingoing_port`
+As you can see each checmaster rule, in the example configuration json file, have a python package and a function name like `checkmaster.sockets.ingoing_port`
  where `checkmaster.sockets` is the python package and the function is `ingoing_port`.
 
- this means that you can use your own package.function in checkmaster without any changes in the code!
+ This means that you can load and use your own `package.function` in checkmaster without any changes in the code!
 
 ## Authors
 
