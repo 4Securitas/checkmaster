@@ -15,8 +15,8 @@ checkmaster -c example_conf.json
 
 Configuration file format conversions
 ````
-checkmaster -c example_conf.yaml --yaml-to-json
-checkmaster -c example_conf.json --json-to-yaml
+checkmaster -c examples/example_conf.yaml --yaml-to-json
+checkmaster -c examples/example_conf.json --json-to-yaml
 ````
 
 
@@ -54,9 +54,9 @@ json configuration file like
     ],
 
     "paths": [
-        {"kind": "file", "path":"./README.md", "status":"present"},
-        {"kind": "file", "path":"README.txt", "status":"absent"},
-        {"kind": "directory", "path":"READMEs", "status":"absent"}
+        {"kind": "file", "path":"./README.md", "status": "present", "permissions": "0664"},
+        {"kind": "file", "path":"README.txt", "status": "absent", "uid": 1000},
+        {"kind": "directory", "path":"READMEs", "status": "absent"}
     ]
 }
 ````
