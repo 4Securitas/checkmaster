@@ -38,13 +38,15 @@ def check_local_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> 
         ):
             logger.debug(i)
             return True
+        else:
+            return False
 
 
-
-def check_remote_port(ip, port) -> bool:
+def check_remote_port(addr, port, timeout=4) -> bool:
    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+   s.settimeout(timeout)
    try:
-      s.connect((ip, int(port)))
+      s.connect((addr, int(port)))
       s.shutdown(2)
       return True
    except:

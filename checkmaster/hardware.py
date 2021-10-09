@@ -13,6 +13,23 @@ def memory_conv(res, unit) -> int:
 def get_cpus() -> int:
     return cpu_count()
 
-def get_ram(unit="MB") -> int:
-    res = psutil.virtual_memory().total  # total physical memory available in Bytes
+def get_ram(unit="MB", kind='free') -> int:
+    """
+        kind = [
+             'active',
+             'available',
+             'buffers',
+             'cached',
+             'count',
+             'free',
+             'inactive',
+             'index',
+             'percent',
+             'shared',
+             'slab',
+             'total',
+             'used'
+        ]
+    """
+    res = getattr(psutil.virtual_memory(), kind)  # total physical memory available in Bytes
     return memory_conv(res, unit)

@@ -8,8 +8,10 @@ from checkmaster.hardware import memory_conv
 def file_exists(path):
     return os.path.isfile(path)
 
+
 def dir_exists(path):
     return os.path.isdir(path)
+
 
 def get_permissions(path):
     """example: 0o100664"""
@@ -24,6 +26,7 @@ def get_permissions(path):
         'modified': datetime.fromtimestamp(st.st_mtime),
         'last_access': datetime.fromtimestamp(st.st_atime)
     }
+
 
 def get_free_space(path, unit='MB', kind='free') -> int:
     """

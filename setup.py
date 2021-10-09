@@ -35,6 +35,8 @@ setup(
         ]
     },
     install_requires=[
-        'pyYaml'
+        'pyYaml',
+        'psutil',
+        'distro'
     ],
 )
