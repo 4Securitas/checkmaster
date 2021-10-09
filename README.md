@@ -61,86 +61,87 @@ json configuration file like
 }
 ````
 
+<details>
+    <summary>yaml configuration file like ... Click to expand!</summary>
 
-yaml configuration file like
-
-````
-checkmaster.commands.run:
-- cmd: ping -c 1 google.com
-  exit_status: 0
-  stderr_regexp: ''
-  stdout_regexp: 1 received
-checkmaster.filesystems.paths:
-- gid: 1000
-  kind: file
-  path: ./README.md
-  permissions: '0664'
-  status: present
-  uid: 1000
-- kind: file
-  path: README.txt
-  status: absent
-- kind: directory
-  path: READMEs
-  status: absent
-checkmaster.filesystems.size:
-- kind: free
-  operator: ge
-  path: /
-  unit: GB
-  value: '100'
-checkmaster.hardware.cores:
-  operator: ge
-  value: 8
-checkmaster.hardware.ram:
-  kind: free
-  operator: ge
-  unit: GB
-  value: 4
-checkmaster.sockets.ingoing_port:
-- addrs:
-  - 0.0.0.0
-  kind: tcp
-  port: 22
-- addrs:
-  - 0.0.0.0
-  kind: tcp
-  port: 8080
-- addrs:
-  - 0.0.0.0
-  kind: tcp
-  port: 8443
-- kind: tcp
-  port: 80
-  status: CLOSED
-- addrs:
-  - 0.0.0.0
-  kind: tcp
-  port: 5044
-- kind: udp
-  port: 1514
-- addrs:
-  - 0.0.0.0
-  kind: tcp
-  port: 1515
-checkmaster.sockets.outgoing_port:
-- addr: that-host.net
-  kind: tcp
-  port: 5150
-  timeout: 2
-- addr: that-host.net
-  kind: tcp
-  port: 443
-  timeout: 2
-- addr: that-host.net
-  kind: tcp
-  port: 5986
-  timeout: 2
-- addr: that-host.net
-  kind: tcp
-  port: 22
-  timeout: 2
-````
+    ````
+    checkmaster.commands.run:
+    - cmd: ping -c 1 google.com
+      exit_status: 0
+      stderr_regexp: ''
+      stdout_regexp: 1 received
+    checkmaster.filesystems.paths:
+    - gid: 1000
+      kind: file
+      path: ./README.md
+      permissions: '0664'
+      status: present
+      uid: 1000
+    - kind: file
+      path: README.txt
+      status: absent
+    - kind: directory
+      path: READMEs
+      status: absent
+    checkmaster.filesystems.size:
+    - kind: free
+      operator: ge
+      path: /
+      unit: GB
+      value: '100'
+    checkmaster.hardware.cores:
+      operator: ge
+      value: 8
+    checkmaster.hardware.ram:
+      kind: free
+      operator: ge
+      unit: GB
+      value: 4
+    checkmaster.sockets.ingoing_port:
+    - addrs:
+      - 0.0.0.0
+      kind: tcp
+      port: 22
+    - addrs:
+      - 0.0.0.0
+      kind: tcp
+      port: 8080
+    - addrs:
+      - 0.0.0.0
+      kind: tcp
+      port: 8443
+    - kind: tcp
+      port: 80
+      status: CLOSED
+    - addrs:
+      - 0.0.0.0
+      kind: tcp
+      port: 5044
+    - kind: udp
+      port: 1514
+    - addrs:
+      - 0.0.0.0
+      kind: tcp
+      port: 1515
+    checkmaster.sockets.outgoing_port:
+    - addr: that-host.net
+      kind: tcp
+      port: 5150
+      timeout: 2
+    - addr: that-host.net
+      kind: tcp
+      port: 443
+      timeout: 2
+    - addr: that-host.net
+      kind: tcp
+      port: 5986
+      timeout: 2
+    - addr: that-host.net
+      kind: tcp
+      port: 22
+      timeout: 2
+    ````
+</details>
 
 ## Contribute
 
