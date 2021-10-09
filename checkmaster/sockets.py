@@ -10,7 +10,7 @@ LOCAL_ADDRESS = [
 logger = logging.getLogger(__name__)
 
 
-def check_local_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> bool:
+def ingoing_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> bool:
     """
     +------------+----------------------------------------------------+
     | Kind Value | Connections using                                  |
@@ -44,7 +44,8 @@ def check_local_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> 
     return result
 
 
-def check_remote_port(addr, port, timeout=4) -> bool:
+def outgoing_port(addr, port, timeout=4, kind=None) -> bool:
+   # TODO: kind is unused !!!
    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
    s.settimeout(timeout)
    try:

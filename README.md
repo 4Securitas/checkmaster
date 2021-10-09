@@ -26,7 +26,7 @@ json configuration file like
 
 ````
 {
-    "ingoing_ports": [
+    "checkmaster.sockets.ingoing_port": [
         {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"]},
         {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"]},
         {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"]},
@@ -35,27 +35,26 @@ json configuration file like
         {"kind": "udp", "port": 1514},
         {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"]}
     ],
-    "outgoing_ports": [
-        {"addr": "that-host.net", "port":5150, "kind": "tcp", "timeout": 10},
-        {"addr": "that-host.net", "port":443, "kind": "tcp"},
-        {"addr": "that-host.net", "port":5986, "kind": "tcp"},
-        {"addr": "that-host.net", "port":22, "kind": "tcp"}
+    "checkmaster.sockets.outgoing_port": [
+        {"addr": "that-host.net", "port":5150, "kind": "tcp", "timeout": 2},
+        {"addr": "that-host.net", "port":443, "kind": "tcp", "timeout": 2},
+        {"addr": "that-host.net", "port":5986, "kind": "tcp", "timeout": 2},
+        {"addr": "that-host.net", "port":22, "kind": "tcp", "timeout": 2}
     ],
-
-    "system_commands": [
+    "checkmaster.commands.run": [
         {"cmd": "ping -c 1 google.com", "exit_status":0, "stdout_regexp": "1 received", "stderr_regexp": ""}
     ],
 
-    "cpu": {"core_min": 8},
-    "ram": {"free": 7, "unit": "GB"},
+    "checkmaster.hardware.cores": {"operator": "ge", "value": 8},
+    "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 4, "unit": "GB"},
 
-    "filesystems": [
-        {"path":"/", "free": "100", "unit": "GB"}
+    "checkmaster.filesystems.size": [
+        {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge"}
     ],
 
-    "paths": [
-        {"kind": "file", "path":"./README.md", "status": "present", "permissions": "0664"},
-        {"kind": "file", "path":"README.txt", "status": "absent", "uid": 1000},
+    "checkmaster.filesystems.paths": [
+        {"kind": "file", "path":"./README.md", "status": "present", "permissions": "0664", "uid": 1000, "gid": 1000},
+        {"kind": "file", "path":"README.txt", "status": "absent"},
         {"kind": "directory", "path":"READMEs", "status": "absent"}
     ]
 }
@@ -65,62 +64,81 @@ json configuration file like
 yaml configuration file like
 
 ````
-cpu:
-  core_min: 8
-filesystems:
-- free_min: 100GB
-  path: /
-ingoing_ports:
-- kind: tcp
-  location: 0.0.0.0
-  port: 22
-- kind: tcp
-  location: 0.0.0.0
-  port: 8080
-- kind: tcp
-  location: 0.0.0.0
-  port: 8443
-- kind: tcp
-  port: 80
-  status: CLOSED
-- kind: tcp
-  location: 0.0.0.0
-  port: 5044
-- kind: udp
-  port: 1514
-- kind: tcp
-  location: 0.0.0.0
-  port: 1515
-outgoing_ports:
-- addr: that-host.net
-  kind: tcp
-  port: 5150
-- addr: that-host.net
-  kind: tcp
-  port: 443
-- addr: that-host.net
-  kind: tcp
-  port: 5986
-- addr: that-host.net
-  kind: tcp
-  port: 22
-paths:
-- kind: file
+checkmaster.commands.run:
+- cmd: ping -c 1 google.com
+  exit_status: 0
+  stderr_regexp: ''
+  stdout_regexp: 1 received
+checkmaster.filesystems.paths:
+- gid: 1000
+  kind: file
   path: ./README.md
+  permissions: '0664'
   status: present
+  uid: 1000
 - kind: file
   path: README.txt
   status: absent
 - kind: directory
   path: READMEs
   status: absent
-ram:
-  free_min: 7GB
-system_commands:
-- cmd: ping -c 1 google.com
-  exit_status: 0
-  stderr_regexp: ''
-  stdout_regexp: 1 received
+checkmaster.filesystems.size:
+- kind: free
+  operator: ge
+  path: /
+  unit: GB
+  value: '100'
+checkmaster.hardware.cores:
+  operator: ge
+  value: 8
+checkmaster.hardware.ram:
+  kind: free
+  operator: ge
+  unit: GB
+  value: 4
+checkmaster.sockets.ingoing_port:
+- addrs:
+  - 0.0.0.0
+  kind: tcp
+  port: 22
+- addrs:
+  - 0.0.0.0
+  kind: tcp
+  port: 8080
+- addrs:
+  - 0.0.0.0
+  kind: tcp
+  port: 8443
+- kind: tcp
+  port: 80
+  status: CLOSED
+- addrs:
+  - 0.0.0.0
+  kind: tcp
+  port: 5044
+- kind: udp
+  port: 1514
+- addrs:
+  - 0.0.0.0
+  kind: tcp
+  port: 1515
+checkmaster.sockets.outgoing_port:
+- addr: that-host.net
+  kind: tcp
+  port: 5150
+  timeout: 2
+- addr: that-host.net
+  kind: tcp
+  port: 443
+  timeout: 2
+- addr: that-host.net
+  kind: tcp
+  port: 5986
+  timeout: 2
+- addr: that-host.net
+  kind: tcp
+  port: 22
+  timeout: 2
 ````
 
 ## Authors

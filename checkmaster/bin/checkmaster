@@ -58,7 +58,10 @@ parser.add_argument(
 )
 
 _args = parser.parse_args()
-logging.basicConfig(level=getattr(logging, _args.debug))
+logging.basicConfig(
+    level=getattr(logging, _args.debug),
+    format= '%(levelname)-2s %(message)s',
+)
 
 if _args.version:
     sys.exit(f'{__version__}')
@@ -81,7 +84,7 @@ elif _args.configuration:
         sys.exit()
 
     checkmaster = CheckMaster(conf)
-    checkmaster.check()
+    checkmaster.start()
 
     if _args.report_format == 'json':
         report = json.dumps(checkmaster.result, indent=2)
@@ -91,5 +94,3 @@ elif _args.configuration:
     if _args.report_file:
         with open(_args.report_file, 'w') as f:
             f.write(report)
-    # else:
-        # print(report)

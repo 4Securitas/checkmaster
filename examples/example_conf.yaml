@@ -1,9 +1,36 @@
-cpu:
-  core_min: 8
-filesystems:
-- free_min: 100GB
+checkmaster.commands.run:
+- cmd: ping -c 1 google.com
+  exit_status: 0
+  stderr_regexp: ''
+  stdout_regexp: 1 received
+checkmaster.filesystems.paths:
+- gid: 1000
+  kind: file
+  path: ./README.md
+  permissions: '0664'
+  status: present
+  uid: 1000
+- kind: file
+  path: README.txt
+  status: absent
+- kind: directory
+  path: READMEs
+  status: absent
+checkmaster.filesystems.size:
+- kind: free
+  operator: ge
   path: /
-ingoing_ports:
+  unit: GB
+  value: '100'
+checkmaster.hardware.cores:
+  operator: ge
+  value: 8
+checkmaster.hardware.ram:
+  kind: free
+  operator: ge
+  unit: GB
+  value: 4
+checkmaster.sockets.ingoing_port:
 - addrs:
   - 0.0.0.0
   kind: tcp
@@ -29,38 +56,21 @@ ingoing_ports:
   - 0.0.0.0
   kind: tcp
   port: 1515
-outgoing_ports:
+checkmaster.sockets.outgoing_port:
 - addr: that-host.net
   kind: tcp
   port: 5150
-  timeout: 10
+  timeout: 2
 - addr: that-host.net
   kind: tcp
   port: 443
+  timeout: 2
 - addr: that-host.net
   kind: tcp
   port: 5986
+  timeout: 2
 - addr: that-host.net
   kind: tcp
   port: 22
-paths:
-- kind: file
-  path: ./README.md
-  permissions: '0664'
-  status: present
-- kind: file
-  path: README.txt
-  status: absent
-  uid: 1000
-- kind: directory
-  path: READMEs
-  status: absent
-ram:
-  free: 7
-  unit: GB
-system_commands:
-- cmd: ping -c 1 google.com
-  exit_status: 0
-  stderr_regexp: ''
-  stdout_regexp: 1 received
+  timeout: 2
 

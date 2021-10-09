@@ -1,25 +1,71 @@
+import logging
+import operator as op
 import os
 import psutil
+
 from datetime import datetime
 
 from checkmaster.hardware import memory_conv
 
-
-def file_exists(path):
-    return os.path.isfile(path)
+logger = logging.getLogger(__name__)
 
 
-def dir_exists(path):
-    return os.path.isdir(path)
+def paths(
+        path, kind='file', status = "present",
+        permissions = None, uid = None, gid = None
+    ):
+    if kind == 'file':
+         _func = os.path.isfile
+    elif kind == 'directory':
+        _func = os.path.isdir
+
+    try:
+        exists = _func(path)
+    except FileNotFoundError as e:
+        if status != 'present':
+            return True
+        else:
+            return False
+
+    # existence
+    if exists and status == 'present':
+        status = True
+    elif not exists and status == 'absent':
+        return True
+    elif not exists and status == 'present':
+        return False
+    else:
+        raise NotImplemented()
+
+    # permissions
+    if permissions or uid or gid:
+        try:
+            perms = get_permissions(path)
+            logger.debug(perms)
+        except FileNotFoundError as e:
+            logger.error(e)
+            return False
+    else:
+        return status
+
+    # TODO: additional checks on atime, ctime, mtime are possible
+    if permissions and permissions != perms['permissions']:
+        return False
+    elif uid and uid != perms['user']:
+        return False
+    elif gid and gid != perms['group']:
+        return False
+    else:
+        return status
 
 
-def get_permissions(path):
+def get_permissions(path) -> dict:
     """example: 0o100664"""
     st = os.stat(path)
     perm = str(oct(st.st_mode))
     return {
         'raw_permissions': perm,
-        'permissions': perm[3:],
+        'permissions': perm[4:],
         'user': st.st_uid,
         'group': st.st_gid,
         'create': datetime.fromtimestamp(st.st_ctime),
@@ -28,7 +74,7 @@ def get_permissions(path):
     }
 
 
-def get_free_space(path, unit='MB', kind='free') -> int:
+def size(path, unit='MB', kind='free', operator='ge', value=100) -> int:
     """
         kind = set(
             total, used, free, percent
@@ -36,6 +82,8 @@ def get_free_space(path, unit='MB', kind='free') -> int:
     """
     size = psutil.disk_usage(path)
     if kind == 'percent':
-        return size.percent
+        size = size.percent
     else:
-        return memory_conv(getattr(size, kind), unit)
+        size =  memory_conv(getattr(size, kind), unit)
+    logger.debug(f"Found {size}{unit} of RAM")
+    return getattr(op, operator)(value, value)

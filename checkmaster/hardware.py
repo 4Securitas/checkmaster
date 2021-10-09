@@ -1,4 +1,8 @@
+import logging
+import operator as op
 import psutil
+
+logger = logging.getLogger(__name__)
 
 
 def memory_conv(res, unit) -> int:
@@ -8,12 +12,19 @@ def memory_conv(res, unit) -> int:
         res =  (res / 1024) / 1024
     elif unit.lower() == "kb":
         res = res / 1024
-    return int(res)
+    return round(res, 2)
 
-def get_cpus() -> int:
-    return cpu_count()
 
-def get_ram(unit="MB", kind='free') -> int:
+def cores(operator='ge', value=0) -> int:
+    """
+        see https://docs.python.org/3/library/operator.html
+    """
+    cores = psutil.cpu_count()
+    logger.debug(f"Found {cores} CPU cores")
+    return getattr(op, operator)(cores, value)
+
+
+def ram(unit="MB", kind='free', operator='ge', value=0) -> int:
     """
         kind = [
              'active',
@@ -31,5 +42,10 @@ def get_ram(unit="MB", kind='free') -> int:
              'used'
         ]
     """
-    res = getattr(psutil.virtual_memory(), kind)  # total physical memory available in Bytes
-    return memory_conv(res, unit)
+    # total physical memory available usually in Bytes
+    res = getattr(psutil.virtual_memory(), kind)
+    memory = memory_conv(res, unit)
+    logger.debug(f"Found {memory}{unit} {kind} RAM")
+    return getattr(op, operator)(memory, value)
+
+
