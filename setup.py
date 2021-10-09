@@ -22,7 +22,7 @@ setup(
     classifiers=['Development Status :: 5 - Production/Stable',
                  'License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)',
                  'Programming Language :: Python :: 3'],
-    url='https://github.com/peppelinux/video-marker',
+    url='https://github.com/peppelinux/checkmaster',
     author='Giuseppe De Marco',
     author_email='demarcog83@gmail.com',
     license='License :: OSI Approved :: European Union Public Licence 1.2 (EUPL 1.2)',
