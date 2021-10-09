@@ -41,6 +41,9 @@ def ingoing_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS) -> bool
             return result
         else:
             result = False
+
+    if not result and status in ['CLOSED', 'NA']:
+        return True
     return result
 
 
