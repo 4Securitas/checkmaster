@@ -85,5 +85,6 @@ def size(path, unit='MB', kind='free', operator='ge', value=100) -> int:
         size = size.percent
     else:
         size =  memory_conv(getattr(size, kind), unit)
-    logger.debug(f"Found {size}{unit} of RAM")
-    return getattr(op, operator)(value, value)
+    value = float(value)
+    logger.debug(f"Found {size}{unit} in {path}")
+    return getattr(op, operator)(size, value)
