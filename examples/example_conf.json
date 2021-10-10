@@ -20,6 +20,9 @@
 
     "checkmaster.hardware.cores": {"operator": "ge", "value": 8},
     "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 4, "unit": "GB"},
+    "checkmaster.distribution.processor": {"kind": "x86_64"},
+    "checkmaster.distribution.system": {"kind": "Linux"},
+    "checkmaster.distribution.distro": {"name": "ubuntu", "codename": "focal", "version": "20.04"},
 
     "checkmaster.filesystems.size": [
         {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge"}

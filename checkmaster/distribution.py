@@ -1,42 +1,48 @@
-import distro
+import distro as dist
+import logging
 import platform as pf
 
 from multiprocessing import cpu_count
 
+logger = logging.getLogger(__name__)
 
-def get_architecture() -> str:
+
+def architecture(kind) -> str:
+    """example: ('64bit', 'ELF')"""
+    return kind == pf.architecture()
+
+def processor(kind) -> str:
     """example: x86_64"""
-    return pf.architecture()
+    return kind == pf.processor()
 
-def get_processor() -> str:
-    """example: x86_64"""
-    return pf.processor()
-
-def get_platform() -> str:
+def platform(kind) -> str:
     """Linux-5.4.0-88-generic-x86_64-with-glibc2.29"""
-    return pf.platform()
+    return kind == pf.platform()
 
-def get_system() -> str:
+def system(kind) -> str:
     """example: Linux"""
-    return pf.system()
+    return kind == pf.system()
 
-def get_linux_kernel() -> str:
+def linux_kernel(kind) -> str:
     """example: 5.4.0-88-generic"""
-    return pf.release()
+    return kind == pf.release()
 
-def get_system() -> str:
+def system(kind) -> str:
     """example: Linux"""
-    return pf.system()
+    return kind == pf.system()
 
-def get_system() -> str:
+def distro(**kwargs) -> dict:
     """example: Linux"""
-    return pf.system()
-
-def get_distro() -> dict:
-    """example: Linux"""
-    return {
-        'base': distro.like(),
-        'name': distro.id(),
-        'codename': distro.codename(),
-        'version': distro.version(),
+    values = {
+        'base': dist.like(),
+        'name': dist.id(),
+        'codename': dist.codename(),
+        'version': dist.version(),
     }
+
+    for i in kwargs:
+        if i not in values:
+            logger.warning(f'{i} is not a valid distribution attribute')
+        if kwargs[i].lower() != values[i].lower():
+            return False
+    return True

@@ -3,6 +3,14 @@ checkmaster.commands.run:
   exit_status: 0
   stderr_regexp: ''
   stdout_regexp: 1 received
+checkmaster.distribution.distro:
+  codename: focal
+  name: ubuntu
+  version: '20.04'
+checkmaster.distribution.processor:
+  kind: x86_64
+checkmaster.distribution.system:
+  kind: Linux
 checkmaster.filesystems.paths:
 - gid: 1000
   kind: file
