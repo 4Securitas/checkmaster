@@ -57,7 +57,7 @@ As you can see each checmaster rule, in the example configuration json file, hav
 
  This means that you can load and use your own `package.function` in checkmaster without any changes in the code!
 
-#### comoiling it for windows
+#### Compiling it for Windows
 
 
 ````
