@@ -57,6 +57,24 @@ As you can see each checmaster rule, in the example configuration json file, hav
 
  This means that you can load and use your own `package.function` in checkmaster without any changes in the code!
 
+#### comoiling it for windows
+
+
+````
+sudo apt install wine
+wget https://www.python.org/ftp/python/3.7.6/python-3.7.6-amd64.exe
+wine python-3.7.6-amd64.exe
+
+wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pip install checkmaster pyinstaller
+wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pyinstaller \
+ --hidden-import checkmaster.filesystems \
+ --hidden-import checkmaster.distribution \
+ --hidden-import checkmaster.hardware \
+ --hidden-import checkmaster.sockets \
+ --hidden-import checkmaster.commands \
+ --paths /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/site-packages /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts\checkmaster
+````
+
 ## Authors
 
 - Giuseppe De Marco
