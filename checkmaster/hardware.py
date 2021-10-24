@@ -5,7 +5,7 @@ import psutil
 logger = logging.getLogger(__name__)
 
 
-def memory_conv(res, unit) -> int:
+def memory_conv(res, unit, **kwargs) -> int:
     if unit.lower() == "gb":
         res = ((res / 1024) / 1024) / 1024
     elif unit.lower() == "mb":
@@ -15,7 +15,7 @@ def memory_conv(res, unit) -> int:
     return round(res, 2)
 
 
-def cores(operator='ge', value=0) -> int:
+def cores(operator='ge', value=0, **kwargs) -> int:
     """
         see https://docs.python.org/3/library/operator.html
     """
@@ -24,7 +24,7 @@ def cores(operator='ge', value=0) -> int:
     return getattr(op, operator)(cores, value)
 
 
-def ram(unit="MB", kind='free', operator='ge', value=0) -> int:
+def ram(unit="MB", kind='free', operator='ge', value=0, **kwargs) -> int:
     """
         kind = [
              'active',

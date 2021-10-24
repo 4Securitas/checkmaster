@@ -7,27 +7,27 @@ from multiprocessing import cpu_count
 logger = logging.getLogger(__name__)
 
 
-def architecture(kind) -> str:
+def architecture(kind, **kwargs) -> str:
     """example: ('64bit', 'ELF')"""
     return kind == pf.architecture()
 
-def processor(kind) -> str:
+def processor(kind, **kwargs) -> str:
     """example: x86_64"""
     return kind == pf.processor()
 
-def platform(kind) -> str:
+def platform(kind, **kwargs) -> str:
     """Linux-5.4.0-88-generic-x86_64-with-glibc2.29"""
     return kind == pf.platform()
 
-def system(kind) -> str:
+def system(kind, **kwargs) -> str:
     """example: Linux"""
     return kind == pf.system()
 
-def linux_kernel(kind) -> str:
+def linux_kernel(kind, **kwargs) -> str:
     """example: 5.4.0-88-generic"""
     return kind == pf.release()
 
-def system(kind) -> str:
+def system(kind, **kwargs) -> str:
     """example: Linux"""
     return kind == pf.system()
 

@@ -53,6 +53,19 @@ parser.add_argument(
     help="Debug level, see python logging; defaults to INFO if omitted"
 )
 parser.add_argument(
+    '--tags',
+    nargs='*',
+    required=False,
+    help="only executes the rules with these tags"
+)
+parser.add_argument(
+    '--log-style',
+    required=False,
+    default='label',
+    choices=('label', 'raw'),
+    help="Fancy output or raw one"
+)
+parser.add_argument(
     '-v', '--version', required=False,
     action="store_true",
     help="Print version and exit"
@@ -84,7 +97,9 @@ elif _args.configuration:
         print(json.dumps(conf))
         sys.exit()
 
-    checkmaster = CheckMaster(conf)
+    checkmaster = CheckMaster(
+        conf, tags=_args.tags, log_style=_args.log_style
+    )
     checkmaster.start()
 
     if _args.report_format == 'json':

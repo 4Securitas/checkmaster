@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 def paths(
         path, kind='file', status = "present",
-        permissions = None, uid = None, gid = None
+        permissions = None, uid = None, gid = None, **kwargs
     ):
     if kind == 'file':
          _func = os.path.isfile
@@ -74,7 +74,7 @@ def get_permissions(path) -> dict:
     }
 
 
-def size(path, unit='MB', kind='free', operator='ge', value=100) -> int:
+def size(path, unit='MB', kind='free', operator='ge', value=100, **kwargs) -> int:
     """
         kind = set(
             total, used, free, percent

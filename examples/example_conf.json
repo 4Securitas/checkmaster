@@ -1,9 +1,9 @@
 {
     "checkmaster.sockets.ingoing_port": [
-        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"]},
+        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"], "tag": "mine"},
         {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"]},
-        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"]},
-        {"kind": "tcp", "port": 80, "status": "CLOSED"},
+        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"], "label": "The TCP port 8443 MUST be opened", "tag": "labeled"},
+        {"kind": "tcp", "port": 80, "status": "CLOSED", "label": "The TCP port 80 MUST be opened", "tag": "labeled"},
         {"kind": "tcp", "port": 5044, "addrs": ["0.0.0.0"]},
         {"kind": "udp", "port": 1514},
         {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"]}
