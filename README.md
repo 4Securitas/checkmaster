@@ -72,7 +72,7 @@ wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Pro
  --hidden-import checkmaster.hardware \
  --hidden-import checkmaster.sockets \
  --hidden-import checkmaster.commands \
- --paths /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/site-packages /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts\checkmaster
+ --paths /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/site-packages /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/checkmaster
 ````
 
 Unfortunately VirtusTotal have false positive with the previous compilation, so
