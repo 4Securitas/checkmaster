@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import coloredlogs
 import json
 import yaml
 import logging
@@ -58,9 +59,9 @@ parser.add_argument(
 )
 
 _args = parser.parse_args()
-logging.basicConfig(
-    level=getattr(logging, _args.debug),
-    format= '%(levelname)-2s %(message)s',
+coloredlogs.install(
+    fmt='%(asctime)s %(levelname)s %(message)s',
+    level=_args.debug
 )
 
 if _args.version:

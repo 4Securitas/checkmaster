@@ -37,6 +37,7 @@ setup(
     install_requires=[
         'pyYaml',
         'psutil',
-        'distro'
+        'distro',
+        'coloredlogs',
     ],
 )
