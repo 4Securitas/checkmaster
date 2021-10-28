@@ -8,9 +8,8 @@ logger = logging.getLogger(__name__)
 def run(cmd, exit_status = 0, stdout_regexp = None, stderr_regexp = None, **kwargs) -> bool:
     # subprocess.CompletedProcess
     res =  subprocess.run(
-        cmd.split(' '), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True
     )
-
     logger.debug(logger)
     if not res.returncode == exit_status:
         return False
