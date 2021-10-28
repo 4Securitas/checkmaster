@@ -82,7 +82,7 @@ parser.add_argument(
 
 _args = parser.parse_args()
 coloredlogs.install(
-    fmt='%(asctime)s %(levelname)s %(message)s',
+    fmt='%(message)s ... %(levelname)s ',
     level=_args.debug
 )
 
