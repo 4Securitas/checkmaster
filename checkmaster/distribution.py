@@ -38,7 +38,8 @@ def distro(**kwargs) -> dict:
 
     for i in kwargs:
         if i not in values:
-            logger.warning(f'{i} is not a valid distribution attribute')
+            # logger.warning(f'{i} is not a valid distribution attribute')
+            continue
         if kwargs[i].lower() != values[i].lower():
             return False
     return True
