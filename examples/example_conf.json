@@ -31,7 +31,11 @@
         {"addr": "rubygems.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://rubygems.org must be reachable"}
     ],
     "checkmaster.commands.run": [
-        {"cmd": "ls /lib/modules/$(uname -r)/build", "exit_status":0, "stdout_regexp": "Makefile", "stderr_regexp": "", "tag": "kernel", "label": "The Linux kernel sources MUST be installed"}
+        {"cmd": "ls /lib/modules/$(uname -r)/build", "exit_status":0, "stdout_regexp": "Makefile", "stderr_regexp": "", "tag": "kernel", "label": "The Linux kernel sources MUST be installed"},
+        {"cmd": "sudo iptables -L INPUT -n | tail -n 1", "exit_status":0, "stdout_regexp": "target  ", "stderr_regexp": "", "tag": "firewall", "label": "iptables MUST do not have any INPUT filters"},
+        {"cmd": "sudo iptables -L OUTPUT -n | tail -n 1", "exit_status":0, "stdout_regexp": "target  ", "stderr_regexp": "", "tag": "firewall", "label": "iptables MUST do not have any OUTPUT filters"}
+
+
     ],
 
     "checkmaster.users_groups.user": [
