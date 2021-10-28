@@ -3,6 +3,7 @@ import logging
 import platform as pf
 
 from multiprocessing import cpu_count
+from . status import get_distro_info
 
 logger = logging.getLogger(__name__)
 
@@ -33,12 +34,7 @@ def system(kind, **kwargs) -> str:
 
 def distro(**kwargs) -> dict:
     """example: Linux"""
-    values = {
-        'base': dist.like(),
-        'name': dist.id(),
-        'codename': dist.codename(),
-        'version': dist.version(),
-    }
+    values = get_distro_info()
 
     for i in kwargs:
         if i not in values:

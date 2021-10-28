@@ -9,6 +9,21 @@ pip install checkmaster
 
 ## Usage
 
+If executed without any cofniguration file, checkmaster returns some general information about the environment where it have been executed
+
+````
+{
+  "base": "debian",
+  "name": "ubuntu",
+  "codename": "focal",
+  "version": "20.04",
+  "public ip": "151.53.91.70",
+  "private ip": "192.168.3.115",
+  "private hostname": "wert-desktop.that-thing.lan",
+  "other private ips": null
+}
+````
+
 The parameter `--debug ERROR` will show only the errors and not the entire log
 ````
 checkmaster -c example_conf.json --debug ERROR
@@ -67,6 +82,7 @@ wine python-3.7.6-amd64.exe
 
 wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pip install checkmaster pyinstaller
 wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pyinstaller \
+ -F --clean \
  --hidden-import checkmaster.filesystems \
  --hidden-import checkmaster.distribution \
  --hidden-import checkmaster.hardware \

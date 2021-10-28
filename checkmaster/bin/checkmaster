@@ -8,6 +8,9 @@ import sys
 
 from checkmaster import __version__
 from checkmaster.checkmaster import CheckMaster
+from checkmaster.status import get_distro_info
+from checkmaster.status import get_ips
+
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +69,12 @@ parser.add_argument(
     help="Fancy output or raw one"
 )
 parser.add_argument(
+    '--echo-ip-service',
+    required=False,
+    default='https://icanhazip.com/',
+    help="Web service that returns your IP address"
+)
+parser.add_argument(
     '-v', '--version', required=False,
     action="store_true",
     help="Print version and exit"
@@ -110,3 +119,8 @@ elif _args.configuration:
     if _args.report_file:
         with open(_args.report_file, 'w') as f:
             f.write(report)
+else:
+    env = get_distro_info()
+    ips = get_ips(url = _args.echo_ip_service)
+    env.update(ips)
+    print(json.dumps(env, indent=2))
