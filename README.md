@@ -78,7 +78,7 @@ As you can see each checmaster rule, in the example configuration json file, hav
 ````
 sudo apt install wine
 wget https://www.python.org/ftp/python/3.7.6/python-3.7.6-amd64.exe
-wine python-3.7.6-amd64.exe
+wine msiexec /i python-3.7.6-amd64.exe /qb
 
 wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pip install checkmaster pyinstaller
 wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/pyinstaller \
