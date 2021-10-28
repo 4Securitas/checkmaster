@@ -1,31 +1,47 @@
 {
     "checkmaster.sockets.ingoing_port": [
-        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"], "tag": "mine"},
-        {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"]},
-        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"], "label": "The TCP port 8443 MUST be opened", "tag": "labeled"},
-        {"kind": "tcp", "port": 80, "status": "CLOSED", "label": "The TCP port 80 MUST be opened", "tag": "labeled"},
-        {"kind": "tcp", "port": 5044, "addrs": ["0.0.0.0"]},
-        {"kind": "udp", "port": 1514},
-        {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"]}
+        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 22 MUST be opened"},
+        {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 8080 MUST be opened"},
+        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 8443 MUST be opened"},
+        {"kind": "tcp", "port": 80, "status": "CLOSED", "tag": "acsia_installation", "label": "The TCP port 80 MUST be closed"},
+        {"kind": "tcp", "port": 5044, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 5044 MUST be opened"},
+        {"kind": "udp", "port": 1514, "tag": "acsia_installation", "label": "The UDP port 1514 MUST be opened"},
+        {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 1515 MUST be opened"}
     ],
     "checkmaster.sockets.outgoing_port": [
-        {"addr": "that-host.net", "port":5150, "kind": "tcp", "timeout": 2},
-        {"addr": "that-host.net", "port":443, "kind": "tcp", "timeout": 2},
-        {"addr": "that-host.net", "port":5986, "kind": "tcp", "timeout": 2},
-        {"addr": "that-host.net", "port":22, "kind": "tcp", "timeout": 2}
+        {"addr": "license.acsia.io", "port":5150, "kind": "tcp", "timeout": 4, "tag": "acsia_endpoints", "label": "https://license.acsia.io:5150 must be reachable"},
+        {"addr": "that-host.net", "port":443, "kind": "tcp", "timeout": 1},
+        {"addr": "that-host.net", "port":5986, "kind": "tcp", "timeout": 1},
+        {"addr": "that-host.net", "port":22, "kind": "tcp", "timeout": 1},
+        {"addr": "license.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://license.acsia.io must be reachable"},
+        {"addr": "packages.wazuh.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://packages.wazuh.com must be reachable"},
+        {"addr": "github.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://github.com must be reachable"},
+        {"addr": "download.docker.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://download.docker.com must be reachable"},
+        {"addr": "icanhazip.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://icanhazip.com must be reachable"},
+        {"addr": "dl.fedoraproject.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://dl.fedoraproject.org must be reachable"},
+        {"addr": "mirror.centos.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://mirror.centos.org must be reachable"},
+        {"addr": "mirrors.kernel.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://mirrors.kernel.org must be reachable"},
+        {"addr": "falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://falco.org must be reachable"},
+        {"addr": "download.falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://download.falco.org must be reachable"},
+        {"addr": "4securitas.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://4securitas.com must be reachable"},
+        {"addr": "githubusercontent.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://githubusercontent.com must be reachable"},
+        {"addr": "nexus.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://nexus.acsia.io must be reachable"},
+        {"addr": "docker.elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://docker.elastic.co must be reachable"},
+        {"addr": "elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://elastic.co must be reachable"},
+        {"addr": "rubygems.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://rubygems.org must be reachable"}
     ],
     "checkmaster.commands.run": [
-        {"cmd": "ping -c 1 google.com", "exit_status":0, "stdout_regexp": "1 received", "stderr_regexp": ""}
+        {"cmd": "ping -c 1 google.com", "exit_status":0, "stdout_regexp": "1 received", "stderr_regexp": "", "tag": "example"}
     ],
 
-    "checkmaster.hardware.cores": {"operator": "ge", "value": 8},
-    "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 4, "unit": "GB"},
+    "checkmaster.hardware.cores": {"operator": "ge", "value": 8, "tag": "acsia_installation", "label": "The CPU must have at least 8 cores"},
+    "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 8, "unit": "GB", "tag": "acsia_installation", "label": "The available RAM must be at least 8GB"},
     "checkmaster.distribution.processor": {"kind": "x86_64"},
     "checkmaster.distribution.system": {"kind": "Linux"},
     "checkmaster.distribution.distro": {"name": "ubuntu", "codename": "focal", "version": "20.04"},
 
     "checkmaster.filesystems.size": [
-        {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge"}
+        {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge", "tag": "acsia_installation", "label": "the free space on the disk must be at least 100GB"}
     ],
 
     "checkmaster.filesystems.paths": [

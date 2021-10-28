@@ -1,6 +1,12 @@
 import distro as dist
+import logging
+import psutil
 import requests
 import socket
+
+from . hardware import memory_conv
+
+logger = logging.getLogger(__name__)
 
 
 def get_ips(url="https://icanhazip.com/"):
@@ -25,6 +31,28 @@ def get_distro_info():
         'name': dist.id(),
         'codename': dist.codename(),
         'version': dist.version(),
+        'cores' : psutil.cpu_count(),
+        'free_ram' : memory_conv(psutil.virtual_memory().free, unit='gb')
     }
     return values
 
+
+def sockets_processes_names():
+    res = {}
+
+    for i in psutil.net_connections():
+        _proc = psutil.Process(i.pid)
+        _name = _proc.name()
+        logger.debug(_proc)
+        data = dict(
+            pid = _proc.pid,
+            #process = _proc,
+            process_name = _name,
+            port = i.laddr.port,
+            bind = i.laddr.ip
+        )
+        if _name in res:
+            res[_name].append(data)
+        else:
+            res[_name] = [data]
+    return res
