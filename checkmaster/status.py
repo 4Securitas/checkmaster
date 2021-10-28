@@ -46,7 +46,7 @@ def sockets_processes_names():
         logger.debug(_proc)
         data = dict(
             pid = _proc.pid,
-            #process = _proc,
+            exe = _proc.exe(),
             process_name = _name,
             port = i.laddr.port,
             bind = i.laddr.ip
