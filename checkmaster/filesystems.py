@@ -88,3 +88,6 @@ def size(path, unit='MB', kind='free', operator='ge', value=100, **kwargs) -> in
     value = float(value)
     logger.debug(f"Found {size}{unit} in {path}")
     return getattr(op, operator)(size, value)
+
+def current_working_directory(path):
+    return path == os.getcwd()

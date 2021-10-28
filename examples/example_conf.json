@@ -35,7 +35,7 @@
     ],
 
     "checkmaster.users_groups.user": [
-        {"name": "wert"}
+        {"name": "acsia"}
     ],
 
     "checkmaster.hardware.cores": {"operator": "ge", "value": 8, "tag": "acsia_installation", "label": "The CPU must have at least 8 cores"},
@@ -46,6 +46,10 @@
 
     "checkmaster.filesystems.size": [
         {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge", "tag": "acsia_installation", "label": "the free space on the disk must be at least 100GB"}
+    ],
+
+    "checkmaster.filesystems.current_working_directory": [
+        {"path": "/home/acsia"}
     ],
 
     "checkmaster.filesystems.paths": [
