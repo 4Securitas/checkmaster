@@ -34,6 +34,10 @@
         {"cmd": "ping -c 1 google.com", "exit_status":0, "stdout_regexp": "1 received", "stderr_regexp": "", "tag": "example"}
     ],
 
+    "checkmaster.users_groups.user": [
+        {"name": "wert"}
+    ],
+
     "checkmaster.hardware.cores": {"operator": "ge", "value": 8, "tag": "acsia_installation", "label": "The CPU must have at least 8 cores"},
     "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 8, "unit": "GB", "tag": "acsia_installation", "label": "The available RAM must be at least 8GB"},
     "checkmaster.distribution.processor": {"kind": "x86_64"},
