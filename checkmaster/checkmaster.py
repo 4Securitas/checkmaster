@@ -48,7 +48,7 @@ class CheckMaster:
             else:
                 raise NotImplemented(_func)
             statuses[_func] = _stat
-            if False in statuses.values():
-                return False
-            else:
-                return True
+        if False in statuses.values():
+            return False
+        else:
+            return True
