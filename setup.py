@@ -39,5 +39,6 @@ setup(
         'psutil',
         'distro',
         'coloredlogs',
+        'requests'
     ],
 )
