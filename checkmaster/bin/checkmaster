@@ -109,7 +109,7 @@ elif _args.configuration:
     checkmaster = CheckMaster(
         conf, tags=_args.tags, log_style=_args.log_style
     )
-    checkmaster.start()
+    status = checkmaster.start()
 
     if _args.report_format == 'json':
         report = json.dumps(checkmaster.result, indent=2)
@@ -119,6 +119,10 @@ elif _args.configuration:
     if _args.report_file:
         with open(_args.report_file, 'w') as f:
             f.write(report)
+
+    if not status:
+        sys.exit(1)
+
 else:
     env = get_distro_info()
     ips = get_ips(url = _args.echo_ip_service)

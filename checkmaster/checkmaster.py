@@ -30,16 +30,25 @@ class CheckMaster:
             msg = f"{func_name} {rule}"
         if not _check:
             logger.error(msg)
+            return False
         else:
             logger.info(msg)
+            return True
 
     def start(self):
+        statuses = {}
         for _func, rules in self.result.items():
             func = self.load_plugin(_func)
             if isinstance(rules, dict):
-                self._check(_func, func, rules, self.tags)
+                _stat = self._check(_func, func, rules, self.tags)
+
             elif isinstance(rules, list):
                 for rule in rules:
-                    self._check(_func, func, rule, self.tags)
+                    _stat = self._check(_func, func, rule, self.tags)
             else:
                 raise NotImplemented(_func)
+            statuses[_func] = _stat
+            if False in statuses.values():
+                return False
+            else:
+                return True
