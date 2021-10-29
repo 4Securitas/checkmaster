@@ -4,6 +4,10 @@ Server or workstation requirements validation tool, configurable, extensible and
 ## Setup
 
 ````
+yum install python3 python3-devel
+# OR
+apt install python3 python3-dev
+
 pip install checkmaster
 ````
 
