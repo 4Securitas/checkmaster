@@ -33,7 +33,7 @@ If executed without any cofniguration file, checkmaster returns some general inf
 
 The parameter `--debug ERROR` will show only the errors and not the entire log
 ````
-checkmaster -c example_conf.json --debug ERROR
+checkmaster -c example_conf.json --debug ERROR --log-style raw
 ````
 
 example of the output
@@ -48,6 +48,10 @@ ERROR checkmaster.sockets.outgoing_port {'addr': 'that-host.net', 'port': 443, '
 ERROR checkmaster.sockets.outgoing_port {'addr': 'that-host.net', 'port': 5986, 'kind': 'tcp', 'timeout': 2}
 ERROR checkmaster.sockets.outgoing_port {'addr': 'that-host.net', 'port': 22, 'kind': 'tcp', 'timeout': 2}
 ````
+
+normal output
+![image](https://user-images.githubusercontent.com/1297620/139543038-fc8622f8-e238-43f9-ad87-488ad38c7168.png)
+
 
 Configuration file format conversions
 ````
