@@ -1,6 +1,9 @@
 # checkmaster
 Server or workstation requirements validation tool, configurable, extensible and fast.
 
+[![Downloads](https://pepy.tech/badge/checkmaster)](https://pepy.tech/project/checkmaster)
+[![Downloads](https://pepy.tech/badge/checkmaster/week)](https://pepy.tech/project/checkmaster)
+
 ## Setup
 
 ````
