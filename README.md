@@ -1,6 +1,10 @@
 # checkmaster
 Server or workstation requirements validation tool, configurable, extensible and fast.
 
+
+![CI build](https://github.com/4Securitas/checkmaster/workflows/checkmaster/badge.svg)
+![License](https://img.shields.io/badge/license-Affero%203-blue)
+![Python version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue.svg)
 [![Downloads](https://pepy.tech/badge/checkmaster)](https://pepy.tech/project/checkmaster)
 [![Downloads](https://pepy.tech/badge/checkmaster/week)](https://pepy.tech/project/checkmaster)
 
