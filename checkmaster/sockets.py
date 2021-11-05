@@ -2,15 +2,13 @@ import logging
 import psutil
 import socket
 
-LOCAL_ADDRESS = [
-    '127.0.0.1',
-    '0.0.0.0',
-    '::'
-]
+LOCAL_ADDRESS = ["127.0.0.1", "0.0.0.0", "::"]
 logger = logging.getLogger(__name__)
 
 
-def ingoing_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS, **kwargs) -> bool:
+def ingoing_port(
+    port, status="LISTEN", kind="tcp", addrs=LOCAL_ADDRESS, **kwargs
+) -> bool:
     """
     +------------+----------------------------------------------------+
     | Kind Value | Connections using                                  |
@@ -31,29 +29,24 @@ def ingoing_port(port, status='LISTEN', kind='tcp', addrs=LOCAL_ADDRESS, **kwarg
     for i in psutil.net_connections(kind=kind):
         logger.debug(i)
         result = all(
-            (
-                i.status == status,
-                i.laddr.ip in addrs,
-                i.laddr.port == port
-            )
-        )
+            (i.status == status, i.laddr.ip in addrs, i.laddr.port == port))
         if result:
             return result
         else:
             result = False
 
-    if not result and status in ['CLOSED', 'NA']:
+    if not result and status in ["CLOSED", "NA"]:
         return True
     return result
 
 
 def outgoing_port(addr, port, timeout=4, kind=None, **kwargs) -> bool:
-   # TODO: kind is unused !!!
-   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-   s.settimeout(timeout)
-   try:
-      s.connect((addr, int(port)))
-      s.shutdown(2)
-      return True
-   except:
-      return False
+    # TODO: kind is unused !!!
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(timeout)
+    try:
+        s.connect((addr, int(port)))
+        s.shutdown(2)
+        return True
+    except:
+        return False

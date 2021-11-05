@@ -7,11 +7,12 @@ logger = logging.getLogger(__name__)
 
 
 class CheckMaster:
-    def __init__(self, conf, log_style = 'label', tags=None):
+    def __init__(self, conf, log_style="label", tags=None, remediations=True):
         self.conf = conf
         self.result = deepcopy(conf)
         self.tags = tags
         self.log_style = log_style
+        self.remediations = remediations
 
     def load_plugin(self, plugin_name):
         n1, _, n2 = plugin_name.rpartition(".")
@@ -20,16 +21,19 @@ class CheckMaster:
         return func
 
     def _check(self, func_name, func, rule, tags):
-        if self.tags and rule.get('tag') not in tags:
+        if self.tags and rule.get("tag") not in tags:
             return
 
         _check = func(**rule)
-        if self.log_style == 'label':
+        if self.log_style == "label":
             msg = f"{rule.get('label') or rule}"
         else:
             msg = f"{func_name} {rule}"
         if not _check:
             logger.error(msg)
+            if self.remediations:
+                _rem = rule.get("remediation") or "no remediation message"
+                print(f"  {chr(746)} {_rem}")
             return False
         else:
             logger.info(msg)

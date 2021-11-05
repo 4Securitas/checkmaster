@@ -79,6 +79,14 @@ parser.add_argument(
     action="store_true",
     help="Print version and exit"
 )
+parser.add_argument(
+    '--suppress-remediations', '-sr',
+    required=False,
+    default=True,
+    action="store_false",
+    help="Don't show remediations messages"
+)
+
 
 _args = parser.parse_args()
 coloredlogs.install(
@@ -107,7 +115,8 @@ elif _args.configuration:
         sys.exit()
 
     checkmaster = CheckMaster(
-        conf, tags=_args.tags, log_style=_args.log_style
+        conf, tags=_args.tags, log_style=_args.log_style,
+        remediations=_args.suppress_remediations
     )
     status = checkmaster.start()
 
@@ -125,7 +134,7 @@ elif _args.configuration:
 
 else:
     env = get_distro_info()
-    ips = get_ips(url = _args.echo_ip_service)
+    ips = get_ips(url=_args.echo_ip_service)
     ports = sockets_processes_names()
     env.update(ips)
     # env.update({"network ports": ports})

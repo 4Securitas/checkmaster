@@ -6,7 +6,7 @@ import psutil
 import requests
 import socket
 
-from . hardware import memory_conv
+from .hardware import memory_conv
 
 logger = logging.getLogger(__name__)
 
@@ -19,24 +19,24 @@ def get_ips(url="https://icanhazip.com/"):
     _hostn = socket.gethostbyaddr(_ip)
 
     ips = {
-        'public ip': requests.get(url).content.decode().strip(),
-        'private ip': _ip,
-        'private hostname': _hostn[0],
-        'other private ips': print(", ".join(_hostn[1] if len(_hostn)>1 else []))
+        "public ip": requests.get(url).content.decode().strip(),
+        "private ip": _ip,
+        "private hostname": _hostn[0],
+        "other private ips": print(", ".join(_hostn[1] if len(_hostn) > 1 else [])),
     }
     return ips
 
 
 def get_distro_info():
     values = {
-        'base': dist.like(),
-        'name': dist.id(),
-        'codename': dist.codename(),
-        'version': dist.version(),
-        'cores' : psutil.cpu_count(),
-        'free_ram' : memory_conv(psutil.virtual_memory().free, unit='gb'),
-        'user': getpass.getuser(),
-        'uid': os.geteuid()
+        "base": dist.like(),
+        "name": dist.id(),
+        "codename": dist.codename(),
+        "version": dist.version(),
+        "cores": psutil.cpu_count(),
+        "free_ram": memory_conv(psutil.virtual_memory().free, unit="gb"),
+        "user": getpass.getuser(),
+        "uid": os.geteuid(),
     }
     return values
 
@@ -49,11 +49,11 @@ def sockets_processes_names():
         _name = _proc.name()
         logger.debug(_proc)
         data = dict(
-            pid = _proc.pid,
-            exe = _proc.exe(),
-            process_name = _name,
-            port = i.laddr.port,
-            bind = i.laddr.ip
+            pid=_proc.pid,
+            exe=_proc.exe(),
+            process_name=_name,
+            port=i.laddr.port,
+            bind=i.laddr.ip,
         )
         if _name in res:
             res[_name].append(data)
