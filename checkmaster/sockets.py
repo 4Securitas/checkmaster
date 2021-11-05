@@ -48,5 +48,5 @@ def outgoing_port(addr, port, timeout=4, kind=None, **kwargs) -> bool:
         s.connect((addr, int(port)))
         s.shutdown(2)
         return True
-    except:
+    except Exception:
         return False

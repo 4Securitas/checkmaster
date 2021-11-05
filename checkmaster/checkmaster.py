@@ -50,7 +50,7 @@ class CheckMaster:
                 for rule in rules:
                     _stat = self._check(_func, func, rule, self.tags)
             else:
-                raise NotImplemented(_func)
+                raise NotImplementedError(_func)
             statuses[_func] = _stat
         if False in statuses.values():
             return False

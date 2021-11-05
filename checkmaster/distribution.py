@@ -31,11 +31,6 @@ def linux_kernel(kind, **kwargs) -> str:
     return kind == pf.release()
 
 
-def system(kind, **kwargs) -> str:
-    """example: Linux"""
-    return kind == pf.system()
-
-
 def distro(**kwargs) -> dict:
     """example: Linux"""
     values = get_distro_info()

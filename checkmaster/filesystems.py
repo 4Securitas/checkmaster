@@ -34,7 +34,7 @@ def paths(
     elif not exists and status == "present":
         return False
     else:
-        raise NotImplemented()
+        raise NotImplementedError()
 
     # permissions
     if permissions or uid or gid:
