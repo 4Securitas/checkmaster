@@ -11,4 +11,4 @@ def test_example() -> int:
     """
     must fail
     """
-    assert os.system(f"{CMD} -c ../examples/example_conf.json")
+    assert os.system(f"{CMD} -c examples/example_conf.json")
