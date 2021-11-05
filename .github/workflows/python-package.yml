@@ -31,7 +31,7 @@ jobs:
         python -m pip install --upgrade pip flake8 pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
-        python setup.py install
+        python setup.py install -e .
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -40,4 +40,4 @@ jobs:
         flake8 --count --exit-zero --max-complexity=20 --max-line-length=180 --statistics checkmaster/
     - name: Test with pytest and coverage
       run: |
-        pytest -v --cov=checkmaster --cov-report term tests/
+        pytest -v --cov=checkmaster/ --cov-report term tests/
