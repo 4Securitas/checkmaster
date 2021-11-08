@@ -1,5 +1,5 @@
 # checkmaster
-Server or workstation requirements validation tool, configurable, extensible and fast.
+Server or workstation requirements validation tool; configurable, extensible and fast.
 
 
 ![CI build](https://github.com/4Securitas/checkmaster/workflows/checkmaster/badge.svg)
@@ -20,7 +20,7 @@ pip install checkmaster
 
 ## Usage
 
-If executed without any cofniguration file, checkmaster returns some general information about the environment where it have been executed
+If executed without a configuration file, checkmaster returns some general information about the environment where it has been executed.
 
 ````
 {
@@ -35,12 +35,12 @@ If executed without any cofniguration file, checkmaster returns some general inf
 }
 ````
 
-The parameter `--debug ERROR` will show only the errors and not the entire log
+Adding the parameter `--debug ERROR` will show only errors and not the entire log.
 ````
 checkmaster -c example_conf.json --debug ERROR --log-style raw
 ````
 
-example of the output
+Example of checkmaster output with only errors:
 ````
 ERROR checkmaster.sockets.ingoing_port {'kind': 'tcp', 'port': 8080, 'addrs': ['0.0.0.0']}
 ERROR checkmaster.sockets.ingoing_port {'kind': 'tcp', 'port': 8443, 'addrs': ['0.0.0.0']}
@@ -53,17 +53,17 @@ ERROR checkmaster.sockets.outgoing_port {'addr': 'that-host.net', 'port': 5986, 
 ERROR checkmaster.sockets.outgoing_port {'addr': 'that-host.net', 'port': 22, 'kind': 'tcp', 'timeout': 2}
 ````
 
-normal output
+Normal checkmaster output:
 ![image](https://user-images.githubusercontent.com/1297620/139543038-fc8622f8-e238-43f9-ad87-488ad38c7168.png)
 
 
-Configuration file format conversions
+To convert the configuration file format:
 ````
 checkmaster -c examples/example_conf.yaml --yaml-to-json
 checkmaster -c examples/example_conf.json --json-to-yaml
 ````
 
-Filter which rules to execute by tag
+To filter which rules to execute by tag:
 
 ````
 checkmaster -c examples/example_conf.json --tags mine
@@ -73,19 +73,19 @@ checkmaster -c examples/example_conf.json --tags mine
 
 ## Configuration file
 
-- json configuration file like [this example](examples/example_conf.json)
-- yaml configuration file like [this example](examples/example_conf.yaml)
+- Example json configuration file: [this example](examples/example_conf.json)
+- Example yaml configuration file: [this example](examples/example_conf.yaml)
 
 ## Contribute
 
-Feel free to open new issues and pull requests
+Feel free to open new issues and pull requests.
 
 ## For Developers
 
-As you can see each checmaster rule, in the example configuration json file, have a python package and a function name like `checkmaster.sockets.ingoing_port`
+As you can see each checkmaster rule in the example configuration json file, has a python package and a function named something like `checkmaster.sockets.ingoing_port`
  where `checkmaster.sockets` is the python package and the function is `ingoing_port`.
 
- This means that you can load and use your own `package.function` in checkmaster without any changes in the code!
+ This means that you can load and use your own `package.function` in checkmaster without changing any checkmaster code!
 
 #### Compiling it for Windows
 
@@ -106,7 +106,7 @@ wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Pro
  --paths /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/site-packages /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/checkmaster
 ````
 
-Unfortunately VirtusTotal have false positive with the previous compilation, so
+Unfortunately VirtusTotal may have false positives with the above compilation process, so to avoid that:
 
 ````
 pip uninstall pyinstaller
@@ -124,7 +124,7 @@ set PYPATH="c:\users\utente\appdata\local\packages\pythonsoftwarefoundation.pyth
 pyinstaller -F --hidden-import checkmaster.filesystems --hidden-import checkmaster.distribution --hidden-import checkmaster.hardware --hidden-import checkmaster.sockets --hidden-import checkmaster.commands --paths $PYPATH\site-packages $PYPATH\\Scripts\checkmaster
 ````
 
-if you still have false positive from virus total consider to notify your checkmaster.exe to antivirus vendors!
+If you still have false positive from virus total consider sending your checkmaster.exe to antivirus vendors!
 
 
 ## Authors
