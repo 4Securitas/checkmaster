@@ -1,58 +1,56 @@
 {
     "checkmaster.sockets.ingoing_port": [
-        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 22 MUST be opened", "remediation": "start and enable openssh server"},
-        {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 8080 MUST be opened", "remediation": "start and enable the server X at port 8080"},
-        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 8443 MUST be opened", "remediation": "start acsia"},
-        {"kind": "tcp", "port": 80, "status": "CLOSED", "tag": "acsia_installation", "label": "The TCP port 80 MUST be closed", "remediation": "start nginx/apache"},
-        {"kind": "tcp", "port": 5044, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 5044 MUST be opened", "remediation": "start and enable service X"},
-        {"kind": "udp", "port": 1514, "tag": "acsia_installation", "label": "The UDP port 1514 MUST be opened", "remediation": "start and enable service X"},
-        {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "The TCP port 1515 MUST be opened", "remediation": "start and enable service X"}
+        {"kind": "tcp", "port": 22, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "ACSIA Server requires TCP port 22 to be open for your to be able to access via SSH to ACSIA", "remediation": "Please open the communication port 22 for SSH connection between ACSIA server and your device"},
+        {"kind": "tcp", "port": 8080, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "ACSIA Server requires TCP port 8080 to be open for your to be able to access to the Web UI of ACSIA", "remediation": "Please open the communication port 8080 for between ACSIA server and your device"},
+        {"kind": "tcp", "port": 8443, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "ACSIA Server requires TCP port 8443 to be open for your to be able to access to the Web UI of ACSIA", "remediation": "Please open the communication port 8443 between ACSIA server and your device"},
+        {"kind": "tcp", "port": 80, "status": "Unreachable", "tag": "acsia_installation", "label": "ACSIA Server requires TCP port 80 to be open for your to be able to access to the Web UI of ACSIA", "remediation": "Please open the communication TCP port 80 between ACSIA server and your device"},
+        {"kind": "tcp", "port": 5044, "addrs": ["0.0.0.0"], "tag": "acsia_installation", "label": "It looks like the client is not able to connect to ACSIA server on TCP port 5044", "remediation": "Please open the communication port 5044 between the client and ACSIA Server"},
+        {"kind": "udp", "port": 1514, "tag": "acsia_installation", "label": "It looks like the client is not able to connect to ACSIA server on UDP port 1514", "remediation": "Please open the communication port 1514 between the client and ACSIA Server"},
+        {"kind": "tcp", "port": 1515, "addrs": ["0.0.0.0"], "tag": "It looks like the client is not able to connect to ACSIA server on TCP port 1515", "remediation": "Please open the communication port 1515 between the client and ACSIA Server"}
     ],
     "checkmaster.sockets.outgoing_port": [
-        {"addr": "license.acsia.io", "port":5150, "kind": "tcp", "timeout": 4, "tag": "acsia_endpoints", "label": "https://license.acsia.io:5150 must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "that-host.net", "port":443, "kind": "tcp", "timeout": 1, "remediation": "please check your firewall or internet connection"},
-        {"addr": "that-host.net", "port":5986, "kind": "tcp", "timeout": 1, "remediation": "please check your firewall or internet connection"},
-        {"addr": "that-host.net", "port":22, "kind": "tcp", "timeout": 1, "remediation": "please check your firewall or internet connection"},
-        {"addr": "license.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://license.acsia.io must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "packages.wazuh.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://packages.wazuh.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "github.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://github.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "download.docker.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://download.docker.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "icanhazip.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://icanhazip.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "dl.fedoraproject.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://dl.fedoraproject.org must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "mirror.centos.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://mirror.centos.org must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "mirrors.kernel.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://mirrors.kernel.org must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://falco.org must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "download.falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://download.falco.org must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "4securitas.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://4securitas.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "githubusercontent.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://githubusercontent.com must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "nexus.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://nexus.acsia.io must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "docker.elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://docker.elastic.co must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://elastic.co must be reachable", "remediation": "please check your firewall or internet connection"},
-        {"addr": "rubygems.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "https://rubygems.org must be reachable", "remediation": "please check your firewall or internet connection"}
+        {"addr": "license.acsia.io", "port":5150, "kind": "tcp", "timeout": 4, "tag": "acsia_endpoints", "label": "It looks like "https://license.acsia.io:5150 is unreachable from ACSIA Server", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to License Server on TCP port 5150"},
+        {"addr": "that-host.net", "port":5986, "kind": "tcp", "timeout": 1, "remediation": "Please make sure that ACSIA Server is able to connect on TCP port 5986 for Windows clients"},
+        {"addr": "that-host.net", "port":22, "kind": "tcp", "timeout": 1, "remediation": "Please make sure that ACSIA Server is able to connect on TCP port 22 for Linux clients"},
+        {"addr": "license.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like "https://license.acsia.io unreachable from ACSIA Server", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to License Server on TCP port 443"},
+        {"addr": "packages.wazuh.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": " It looks like https://packages.wazuh.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "github.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://github.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "download.docker.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://download.docker.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "icanhazip.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://icanhazip.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "dl.fedoraproject.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://dl.fedoraproject.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "mirror.centos.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://mirror.centos.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "mirrors.kernel.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://mirrors.kernel.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://falco.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "download.falco.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://download.falco.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "4securitas.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://4securitas.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "githubusercontent.com", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://githubusercontent.com is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "nexus.acsia.io", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://nexus.acsia.io is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "docker.elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://docker.elastic.co is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "elastic.co", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://elastic.co is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"},
+        {"addr": "rubygems.org", "port": 443, "kind": "tcp", "timeout": 2, "tag": "acsia_endpoints", "label": "It looks like https://rubygems.org is unreachable", "remediation": "Please configure your firewall and make sure that ACSIA is able to reach out to to that domain"}
     ],
     "checkmaster.commands.run": [
-        {"cmd": "date", "exit_status":0, "stdout_regexp": "UTC", "stderr_regexp": "", "tag": "timezone", "label": "system clock MUST be configured with UTC timezone", "remediation": "sudo timedatectl set-timezone Etc/UTC"},
-        {"cmd": "ls /usr/src/*$(uname -r)", "exit_status":0, "stdout_regexp": "kernel", "stderr_regexp": "", "tag": "kernel", "label": "The Linux kernel sources MUST be installed", "remediation": "you must install the kernel sources and headers, eg: 'sudo yum install \"kernel-devel-uname-r == $(uname -r)\" for rpm based distro OR 'sudo apt install linux-headers-$(uname -r)'"},
-        {"cmd": "sudo iptables -L INPUT -n | tail -n 1", "exit_status":0, "stdout_regexp": "target  ", "stderr_regexp": "", "tag": "firewall", "label": "iptables MUST do not have any INPUT filters", "remediation": "sudo iptables INPUT -F"},
-        {"cmd": "sudo iptables -L OUTPUT -n | tail -n 1", "exit_status":0, "stdout_regexp": "target  ", "stderr_regexp": "", "tag": "firewall", "label": "iptables MUST do not have any OUTPUT filters", "remediation": "sudo iptables OUTPUT -F"}
+        {"cmd": "date", "exit_status":0, "stdout_regexp": "UTC", "stderr_regexp": "", "tag": "timezone", "label": "The recommended system time is UTC timezone", "remediation": "Please run sudo timedatectl set-timezone Etc/UTC command to set the time to UTC"},
+        {"cmd": "ls /usr/src/*$(uname -r)", "exit_status":0, "stdout_regexp": "kernel", "stderr_regexp": "", "tag": "kernel", "label": "The Linux kernel headers required", "remediation": "Please install kernel headers prior to installation, eg: 'sudo yum install \"kernel-devel-uname-r == $(uname -r)\" for rpm based distro OR 'sudo apt install linux-headers-$(uname -r)'"},
+        {"cmd": "sudo iptables -L INPUT -n | tail -n 1", "exit_status":0, "stdout_regexp": "target  ", "stderr_regexp": "", "tag": "firewall", "label": "It looks like you have the IPTables enabled on ACSIA server", "remediation": "Please disable Iptables"}
     ],
 
     "checkmaster.users_groups.user": [
         {"name": "acsia", "tag": "user", "label": "The username must be acsia", "remediation": "sudo su acsia"}
     ],
 
-    "checkmaster.hardware.cores": {"operator": "ge", "value": 8, "tag": "acsia_installation", "label": "The CPU must have at least 8 cores", "remediation": "Increase your virtual cores or buy another PC"},
-    "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 8, "unit": "GB", "tag": "acsia_installation", "label": "The available RAM must be at least 8GB", "remediation": "Increase your virtual RAM or buy some more RAM"},
-    "checkmaster.distribution.processor": {"kind": "x86_64", "tag": "cpu", "label": "The system must be x86_64", "remediation": "change PC, you need a real 64bit architecture"},
-    "checkmaster.distribution.system": {"kind": "Linux", "tag": "cpu", "label": "The system must be Linux", "remediation": "Please install and then run this check on a real GNU/Linux distribution"},
-    "checkmaster.distribution.distro": {"name": "ubuntu", "codename": "focal", "version": "20.04", "tag": "distro", "label": "The GNU/Linux distribution must be Ubuntu Focal 20.04", "remediation": "You have to use Uubuntu 20.04 for this"},
+    "checkmaster.hardware.cores": {"operator": "ge", "value": 8, "tag": "acsia_installation", "label": "It looks like you have less than 4 VCPU on this server", "remediation": "Please allocate at least 4 vCPUs"},
+    "checkmaster.hardware.ram": {"kind": "free",  "operator": "ge", "value": 8, "unit": "GB", "tag": "acsia_installation", "label": "It looks like you have less than 8GB of RAM on this server", "remediation": "Please allocate at least 8GB of RAM"},
+    "checkmaster.distribution.processor": {"kind": "x86_64", "tag": "cpu", "label": "It looks like you are trying to install ACSIA on a non x86_64 architecture", "remediation": "Please provision a new system running on x86_64 architecture"},
+    "checkmaster.distribution.system": {"kind": "Linux", "tag": "cpu", "label": "ACSIA server can be installed only on Linux systems", "remediation": "Please make sure you are running te installation on a Linux system"},
+    "checkmaster.distribution.distro": {"name": "ubuntu", "codename": "focal", "version": "20.04", "tag": "distro", "label": "The recommended Ubuntu version for this installation is Focal 20.04", "remediation": "Please run the installation on Bununtu 20.04"},
 
     "checkmaster.filesystems.size": [
-        {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge", "tag": "acsia_installation", "label": "the free space on the disk must be at least 100GB", "remediation": "free some disk space or increase your root partition space"}
+        {"path":"/", "kind":"free", "value":"100", "unit": "GB", "operator":"ge", "tag": "acsia_installation", "label": "It looks like you have provisioned small size disk on this system", "remediation": "Please extend the disk size for a minimum of 100GB"}
     ],
 
     "checkmaster.filesystems.current_working_directory": [
-        {"path": "/home/acsia", "tag": "user", "label": "The home path must be /home/acsia", "remediation": "you must run this check as \"acsia\" user and /home/acsia must exists and must be owned by acsia user"}
+        {"path": "/home/acsia", "tag": "user", "label": "The home path must be /home/acsia", "remediation": "You must run this check as \"acsia\" user and /home/acsia must exists and must be owned by acsia user"}
     ],
 
     "checkmaster.filesystems.paths": [

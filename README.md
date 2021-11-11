@@ -1,5 +1,5 @@
 # checkmaster
-Server or workstation requirements validation tool; configurable, extensible and fast.
+Quick validation tool to check the prerequisites for a typical Server or workstation; configurable, extensible and fast.
 
 
 ![CI build](https://github.com/4Securitas/checkmaster/workflows/checkmaster/badge.svg)
@@ -20,7 +20,7 @@ pip install checkmaster
 
 ## Usage
 
-If executed without a configuration file, checkmaster returns some general information about the environment where it has been executed.
+If executed without a configuration file, checkmaster returns some general information on the specific environment where it's been executed.
 
 ````
 {
@@ -35,7 +35,7 @@ If executed without a configuration file, checkmaster returns some general infor
 }
 ````
 
-Adding the parameter `--debug ERROR` will show only errors and not the entire log.
+Adding the parameter `--debug ERROR` will show only errors and not the all logs.
 ````
 checkmaster -c example_conf.json --debug ERROR --log-style raw
 ````
@@ -63,7 +63,7 @@ checkmaster -c examples/example_conf.yaml --yaml-to-json
 checkmaster -c examples/example_conf.json --json-to-yaml
 ````
 
-To filter which rules to execute by tag:
+To filter by rules on the execution tag basis:
 
 ````
 checkmaster -c examples/example_conf.json --tags mine
@@ -78,16 +78,15 @@ checkmaster -c examples/example_conf.json --tags mine
 
 ## Contribute
 
-Feel free to open new issues and pull requests.
+Open to contribution, please feel free to open new issues and pull requests.
 
 ## For Developers
 
-As you can see each checkmaster rule in the example configuration json file, has a python package and a function named something like `checkmaster.sockets.ingoing_port`
- where `checkmaster.sockets` is the python package and the function is `ingoing_port`.
+As you can see each checkmaster rule in the example configuration json file, has a python package and a function named something like `checkmaster.sockets.ingoing_port` where `checkmaster.sockets` is the python package and the function is `ingoing_port`.
 
- This means that you can load and use your own `package.function` in checkmaster without changing any checkmaster code!
+This means that you can use your custom `package.function` and load into checkmaster without performing any changes on the checkmaster code!
 
-#### Compiling it for Windows
+#### Compiling checkmaster for windows
 
 
 ````
@@ -106,7 +105,7 @@ wine /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Pro
  --paths /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/site-packages /home/$USER/.wine/drive_c/users/$USER/Local\ Settings/Application\ Data/Programs/Python/Python37/Scripts/checkmaster
 ````
 
-Unfortunately VirtusTotal may have false positives with the above compilation process, so to avoid that:
+Expect number of false positives with VirtusTotal with the above compilation process, so to bypass that proceed as follow:
 
 ````
 pip uninstall pyinstaller
@@ -124,7 +123,7 @@ set PYPATH="c:\users\utente\appdata\local\packages\pythonsoftwarefoundation.pyth
 pyinstaller -F --hidden-import checkmaster.filesystems --hidden-import checkmaster.distribution --hidden-import checkmaster.hardware --hidden-import checkmaster.sockets --hidden-import checkmaster.commands --paths $PYPATH\site-packages $PYPATH\\Scripts\checkmaster
 ````
 
-If you still have false positive from virus total consider sending your checkmaster.exe to antivirus vendors!
+If you are still having false positive from virus total consider sending your checkmaster.exe to antivirus vendors!
 
 
 ## Authors

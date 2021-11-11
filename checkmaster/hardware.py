@@ -43,6 +43,7 @@ def ram(unit="MB", kind="free", operator="ge", value=0, **kwargs) -> int:
     ]
     """
     # total physical memory available usually in Bytes
+    # note from Stefan: I suggest to add to calculation the buffered memory
     res = getattr(psutil.virtual_memory(), kind)
     memory = memory_conv(res, unit)
     logger.debug(f"Found {memory}{unit} {kind} RAM")

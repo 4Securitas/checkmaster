@@ -10,7 +10,7 @@ from .hardware import memory_conv
 
 logger = logging.getLogger(__name__)
 
-
+# note from Stefan: worth to check between IPv4 and IPv6 that icanhazip.com provides.
 def get_ips(url="https://icanhazip.com/"):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.settimeout(4)
