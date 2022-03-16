@@ -39,7 +39,7 @@ def get_distro_info():
     }
     try:
         values["uid"] = os.geteuid()
-    except Except as e:
+    except Exception as e:
         pass
     return values
 
