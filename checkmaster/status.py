@@ -36,8 +36,11 @@ def get_distro_info():
         "cores": psutil.cpu_count(),
         "free_ram": memory_conv(psutil.virtual_memory().free, unit="gb"),
         "user": getpass.getuser(),
-        "uid": os.geteuid(),
     }
+    try:
+        values["uid"] = os.geteuid()
+    except Except as e:
+        pass
     return values
 
 
