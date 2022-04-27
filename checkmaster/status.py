@@ -16,14 +16,20 @@ def get_ips(url="https://icanhazip.com/"):
     s.settimeout(4)
     s.connect(("8.8.8.8", 80))
     _ip = s.getsockname()[0]
-    _hostn = socket.gethostbyaddr(_ip)
-
     ips = {
         "public ip": requests.get(url).content.decode().strip(),
         "private ip": _ip,
-        "private hostname": _hostn[0],
-        "other private ips": print(", ".join(_hostn[1] if len(_hostn) > 1 else [])),
     }
+
+    try:
+        _hostn = socket.gethostbyaddr(_ip)
+        ips["private hostname"] = _hostn[0]
+        ips["other private ips"] = ", ".join(_hostn[1] if len(_hostn) > 1 else [])
+    except socket.herror as e:
+        pass
+    except Exception as e:
+        logger.warning(f"get_ips error: {e}")
+
     return ips
 
 
