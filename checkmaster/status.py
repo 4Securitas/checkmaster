@@ -11,13 +11,16 @@ from .hardware import memory_conv
 logger = logging.getLogger(__name__)
 
 # note from Stefan: worth to check between IPv4 and IPv6 that icanhazip.com provides.
-def get_ips(url="https://icanhazip.com/"):
+def get_ips(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.settimeout(4)
+    s.settimeout(timeout)
     s.connect(("8.8.8.8", 80))
     _ip = s.getsockname()[0]
     ips = {
-        "public ip": requests.get(url).content.decode().strip(),
+        "public ip": requests.get(
+            url, 
+            timeout=timeout
+        ).content.decode().strip(),
         "private ip": _ip,
     }
 
