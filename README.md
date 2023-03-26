@@ -26,12 +26,22 @@ If executed without a configuration file, checkmaster returns some general infor
 {
   "base": "debian",
   "name": "ubuntu",
-  "codename": "focal",
-  "version": "20.04",
-  "public ip": "151.53.91.70",
-  "private ip": "192.168.3.115",
-  "private hostname": "wert-desktop.that-thing.lan",
-  "other private ips": null
+  "codename": "jammy",
+  "version": "22.04",
+  "cores": 16,
+  "free_ram": 20.43,
+  "user": "wert",
+  "uid": 1000,
+  "public ip": "153.50.22.250",
+  "private ip": "192.168.0.65",
+  "private hostname": "pro.hub",
+  "other private ips": "",
+  "other private ipv6": [
+    "::1",
+    "fe80::686:1117:8a81:4015",
+    "fe80::42:f4ff:fe30:6622",
+    "fe80::dcac:dcff:fe33:3bbc"
+  ]
 }
 ````
 

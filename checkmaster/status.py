@@ -2,6 +2,7 @@ import distro as dist
 import getpass
 import os
 import logging
+import netifaces
 import psutil
 import requests
 import socket
@@ -12,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 # note from Stefan: worth to check between IPv4 and IPv6 that icanhazip.com provides.
 def get_ips(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
+    
+    # ipv4
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.settimeout(timeout)
     s.connect(("8.8.8.8", 80))
@@ -32,6 +35,40 @@ def get_ips(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
         pass
     except Exception as e:
         logger.warning(f"get_ips error: {e}")
+
+    return ips
+
+
+def get_ips_v6(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
+    
+    # ipv6
+    try:
+        s = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
+        s.settimeout(timeout)
+        s.connect(("2a00:1450:4002:406::2003", 80))
+        _ip = s.getsockname()[0]
+        ips = {
+            "public ipv6": requests.get(
+                url, 
+                timeout=timeout
+            ).content.decode().strip(),
+            "private ipv6": _ip,
+        }
+    except OSError as e:
+        logger.warning(f"IPV6 routing failed: {e}")
+        ips = {}
+    
+    ips["other private ipv6"] = []
+    
+    for i in netifaces.interfaces():
+        addrs = netifaces.ifaddresses(i)
+        has_ipv6 = addrs.get(netifaces.AF_INET6)
+        if has_ipv6: 
+            for ii in has_ipv6:
+                _addr = ii["addr"]
+                if "%" in _addr:
+                    _addr = _addr.split("%")[0]
+                ips["other private ipv6"].append(_addr)
 
     return ips
 

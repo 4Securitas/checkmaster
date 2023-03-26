@@ -9,7 +9,7 @@ import sys
 from checkmaster import __version__
 from checkmaster.checkmaster import CheckMaster
 from checkmaster.status import get_distro_info
-from checkmaster.status import get_ips
+from checkmaster.status import get_ips, get_ips_v6
 from checkmaster.status import sockets_processes_names
 
 logger = logging.getLogger(__name__)
@@ -137,5 +137,9 @@ else:
     ips = get_ips(url=_args.echo_ip_service)
     # ports = sockets_processes_names()
     env.update(ips)
+    
+    ips_v6 = get_ips_v6(url=_args.echo_ip_service)
+    env.update(ips_v6)
+        
     # env.update({"network ports": ports})
     print(json.dumps(env, indent=2))
