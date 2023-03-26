@@ -28,8 +28,7 @@ def ingoing_port(
     """
     for i in psutil.net_connections(kind=kind):
         logger.debug(i)
-        result = all(
-            (i.status == status, i.laddr.ip in addrs, i.laddr.port == port))
+        result = all((i.status == status, i.laddr.ip in addrs, i.laddr.port == port))
         if result:
             return result
         else:

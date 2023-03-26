@@ -46,16 +46,16 @@ def ram(unit="MB", kind="free", operator="ge", value=0, **kwargs) -> int:
     # .virtual_memory() returns all the kind of memory
     # like the following eg. The "kind" parameter selects which one to have
     # svmem(total=16431697920,
-          # available=11859709952,
-          # percent=27.8,
-          # used=3853291520,
-          # free=8231968768,
-          # active=4153102336,
-          # inactive=2009620480,
-          # buffers=405647360,
-          # cached=3940790272,
-          # shared=208187392,
-          # slab=581533696
+    # available=11859709952,
+    # percent=27.8,
+    # used=3853291520,
+    # free=8231968768,
+    # active=4153102336,
+    # inactive=2009620480,
+    # buffers=405647360,
+    # cached=3940790272,
+    # shared=208187392,
+    # slab=581533696
     # )
     res = getattr(psutil.virtual_memory(), kind)
     memory = memory_conv(res, unit)

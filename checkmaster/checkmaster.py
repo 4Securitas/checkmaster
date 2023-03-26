@@ -35,13 +35,13 @@ class CheckMaster:
             if self.remediations:
                 _rem = rule.get("remediation") or "no remediation message"
                 print(f"  {chr(746)} {_rem}")
-            if _level == 'warning':
+            if _level == "warning":
                 return _level
             else:
-                return 'false'
+                return "false"
         else:
             logger.info(msg)
-            return 'true'
+            return "true"
 
     def start(self):
         statuses = {}
@@ -56,7 +56,7 @@ class CheckMaster:
             else:
                 raise NotImplementedError(_func)
             statuses[_func] = _stat
-        if 'false' in statuses.values():
+        if "false" in statuses.values():
             return False
         else:
             return True

@@ -11,36 +11,41 @@ from .hardware import memory_conv
 
 logger = logging.getLogger(__name__)
 
+
 # note from Stefan: worth to check between IPv4 and IPv6 that icanhazip.com provides.
-def get_ips(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
-    
+def get_ips(url: str = "https://icanhazip.com/", timeout: int = 4) -> dict:
     # ipv4
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.settimeout(timeout)
     s.connect(("8.8.8.8", 80))
     _ip = s.getsockname()[0]
     ips = {
-        "public ip": requests.get(
-            url, 
-            timeout=timeout
-        ).content.decode().strip(),
+        "public ip": requests.get(url, timeout=timeout).content.decode().strip(),
         "private ip": _ip,
     }
 
     try:
         _hostn = socket.gethostbyaddr(_ip)
         ips["private hostname"] = _hostn[0]
-        ips["other private ips"] = ", ".join(_hostn[1] if len(_hostn) > 1 else [])
+        ips["other private ips"] = []
+        for i in netifaces.interfaces():
+            addrs = netifaces.ifaddresses(i)
+            has_ipv6 = addrs.get(netifaces.AF_INET)
+            if has_ipv6:
+                for ii in has_ipv6:
+                    _addr = ii["addr"]
+                    if "%" in _addr:
+                        _addr = _addr.split("%")[0]
+                    ips["other private ips"].append(_addr)
     except socket.herror as e:
-        pass
+        logger.warning(f"get_ips error: {e}")
     except Exception as e:
         logger.warning(f"get_ips error: {e}")
 
     return ips
 
 
-def get_ips_v6(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
-    
+def get_ips_v6(url: str = "https://icanhazip.com/", timeout: int = 4) -> dict:
     # ipv6
     try:
         s = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
@@ -48,22 +53,19 @@ def get_ips_v6(url:str ="https://icanhazip.com/", timeout: int = 4) -> dict:
         s.connect(("2a00:1450:4002:406::2003", 80))
         _ip = s.getsockname()[0]
         ips = {
-            "public ipv6": requests.get(
-                url, 
-                timeout=timeout
-            ).content.decode().strip(),
+            "public ipv6": requests.get(url, timeout=timeout).content.decode().strip(),
             "private ipv6": _ip,
         }
     except OSError as e:
         logger.warning(f"IPV6 routing failed: {e}")
         ips = {}
-    
+
     ips["other private ipv6"] = []
-    
+
     for i in netifaces.interfaces():
         addrs = netifaces.ifaddresses(i)
         has_ipv6 = addrs.get(netifaces.AF_INET6)
-        if has_ipv6: 
+        if has_ipv6:
             for ii in has_ipv6:
                 _addr = ii["addr"]
                 if "%" in _addr:
@@ -86,7 +88,7 @@ def get_distro_info():
     try:
         values["uid"] = os.geteuid()
     except Exception as e:
-        pass
+        logger.warning(f"get_distro_info error: {e}")
     return values
 
 
