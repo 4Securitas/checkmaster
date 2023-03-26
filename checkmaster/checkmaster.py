@@ -45,6 +45,7 @@ class CheckMaster:
 
     def start(self):
         statuses = {}
+        
         for _func, rules in self.result.items():
             func = self.load_plugin(_func)
             if isinstance(rules, dict):
@@ -53,9 +54,14 @@ class CheckMaster:
             elif isinstance(rules, list):
                 for rule in rules:
                     _stat = self._check(_func, func, rule, self.tags)
+                    if _stat == 'false':
+                        statuses[_func] = "false"
+                        break
             else:
                 raise NotImplementedError(_func)
+            
             statuses[_func] = _stat
+
         if "false" in statuses.values():
             return False
         else:
